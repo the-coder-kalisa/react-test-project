@@ -53,79 +53,89 @@ const Sidebar = () => {
 
   const [activeNav, setActiveNav] = useState("My Agents");
 
+  const [md, setMd] = useState();
+
   const [open, setOpen] = useState(true);
 
-  const [md, setMd] = useState(true);
-
   const handleResize = () => {
-    if (window.innerWidth > 768) {
-      setMd(true);
-    } else {
-      setMd(false);
-    }
+    return window.innerWidth > 768;
   };
 
   useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
+
+    const md = handleResize();
+
+    if (!md) {
+      setOpen(false);
+    }
+    setMd(md);
+    window.addEventListener("resize", () => {
+      setMd(handleResize());
+    });
   }, []);
 
   return (
-    <>
-      {!open ? (
-        <AiOutlineMenu size={20} onClick={() => setOpen(true)} />
-      ) : !md ? (
-        <NotMdSidebarWrapper>
-          <CloseSidebarButton
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
-            Close <br />
-            Sidebar
-          </CloseSidebarButton>
-          {navs.map((nav, index) => (
-            <Nav
-              onClick={() => setActiveNav(nav)}
-              style={
-                nav === activeNav
-                  ? { background: "#757575", color: "white" }
-                  : { background: "white", color: "black" }
-              }
-              $active
-              key={index}
+    md !== undefined && (
+      <>
+        {!open ? (
+          <AiOutlineMenu
+            size={24}
+            style={{ cursor: "pointer" }}
+            onClick={() => setOpen(true)}
+          />
+        ) : !md ? (
+          <NotMdSidebarWrapper onClick={() => setOpen(false)}>
+            <CloseSidebarButton
+              onClick={() => {
+                setOpen(!open);
+              }}
             >
-              {nav}
-            </Nav>
-          ))}
-        </NotMdSidebarWrapper>
-      ) : (
-        <SidebarWrapper>
-          <CloseSidebarButton
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
-            Close <br />
-            Sidebar
-          </CloseSidebarButton>
-          {navs.map((nav, index) => (
-            <Nav
-              onClick={() => setActiveNav(nav)}
-              style={
-                nav === activeNav
-                  ? { background: "#757575", color: "white" }
-                  : { background: "white", color: "black" }
-              }
-              $active
-              key={index}
+              Close <br />
+              Sidebar
+            </CloseSidebarButton>
+            {navs.map((nav, index) => (
+              <Nav
+                onClick={() => setActiveNav(nav)}
+                style={
+                  nav === activeNav
+                    ? { background: "#757575", color: "white" }
+                    : { background: "white", color: "black" }
+                }
+                $active
+                key={index}
+              >
+                {nav}
+              </Nav>
+            ))}
+          </NotMdSidebarWrapper>
+        ) : (
+          <SidebarWrapper>
+            <CloseSidebarButton
+              onClick={() => {
+                setOpen(!open);
+              }}
             >
-              {nav}
-            </Nav>
-          ))}
-        </SidebarWrapper>
-      )}
-    </>
+              Close <br />
+              Sidebar
+            </CloseSidebarButton>
+            {navs.map((nav, index) => (
+              <Nav
+                onClick={() => setActiveNav(nav)}
+                style={
+                  nav === activeNav
+                    ? { background: "#757575", color: "white" }
+                    : { background: "white", color: "black" }
+                }
+                $active
+                key={index}
+              >
+                {nav}
+              </Nav>
+            ))}
+          </SidebarWrapper>
+        )}
+      </>
+    )
   );
 };
 
