@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 const NewAgentButtons = styled.div`
   display: flex;
@@ -14,21 +15,12 @@ const NewAgentButton = styled.button`
   border-radius: 20px;
 `;
 
-const AddAgentButton = styled(NewAgentButton)`
-  border-radius: 999999px;
-  font-size: 30px;
-  font-weight: 500;
-  padding: 0;
-  width: 50px;
-  height: 50px;
-`;
-
 const AgetInterface = () => {
   return (
     <>
       <NewAgentButtons>
         <NewAgentButton>New Agent</NewAgentButton>
-        <AddAgentButton>+</AddAgentButton>
+        <AiFillPlusCircle color="#757575" size={60} />
       </NewAgentButtons>
     </>
   );

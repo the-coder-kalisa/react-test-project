@@ -43,6 +43,8 @@ const Sidebar = () => {
 
   const [activeNav, setActiveNav] = useState("My Agents");
 
+  // const [open, setOpen] = useState(false);
+
   return (
     <SidebarWrapper>
       <CloseSidebarButton>
