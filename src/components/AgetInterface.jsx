@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { Modal } from "@mui/material";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const NewAgentButtons = styled.div`
   display: flex;
@@ -38,14 +39,24 @@ const ModalWrapper = styled.div`
   background-color: #8080807a;
 `;
 
+const ActiveNavContainer = styled.div`
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
 const AgetInterface = () => {
   const [open, setOpen] = useState(false);
+  const activeNav = useSelector((state) => state.activeNav);
   return (
     <>
       <NewAgentButtons>
         <NewAgentButton onClick={() => setOpen(true)}>New Agent</NewAgentButton>
         <AiFillPlusCircle color="#757575" size={60} />
       </NewAgentButtons>
+      <ActiveNavContainer>{activeNav}</ActiveNavContainer>
       <Modal
         open={open}
         aria-labelledby="parent-modal-title"

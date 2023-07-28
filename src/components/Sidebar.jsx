@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { AiOutlineMenu } from "react-icons/ai";
+import { changeNav } from "../store";
+import { useDispatch, useSelector } from "react-redux";
 
 const SidebarWrapper = styled.div`
   border-radius: 10px;
@@ -51,7 +53,8 @@ const Sidebar = () => {
     "Engine Room",
   ];
 
-  const [activeNav, setActiveNav] = useState("My Agents");
+  const activeNav = useSelector((state) => state.activeNav);
+  const dispatch = useDispatch();
 
   const [md, setMd] = useState();
 
@@ -62,7 +65,6 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-
     const md = handleResize();
 
     if (!md) {
@@ -95,7 +97,7 @@ const Sidebar = () => {
             </CloseSidebarButton>
             {navs.map((nav, index) => (
               <Nav
-                onClick={() => setActiveNav(nav)}
+                onClick={() => dispatch(changeNav(nav))}
                 style={
                   nav === activeNav
                     ? { background: "#757575", color: "white" }
@@ -120,7 +122,7 @@ const Sidebar = () => {
             </CloseSidebarButton>
             {navs.map((nav, index) => (
               <Nav
-                onClick={() => setActiveNav(nav)}
+                onClick={() => dispatch(changeNav(nav))}
                 style={
                   nav === activeNav
                     ? { background: "#757575", color: "white" }
