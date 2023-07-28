@@ -53,7 +53,7 @@ const Sidebar = () => {
 
   const [activeNav, setActiveNav] = useState("My Agents");
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const [md, setMd] = useState(false);
 
