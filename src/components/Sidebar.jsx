@@ -55,7 +55,7 @@ const Sidebar = () => {
 
   const [open, setOpen] = useState(true);
 
-  const [md, setMd] = useState(false);
+  const [md, setMd] = useState(true);
 
   const handleResize = () => {
     if (window.innerWidth > 768) {
